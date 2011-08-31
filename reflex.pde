@@ -31,7 +31,7 @@
 #define BLINK_DELAY 100
 
 /// @brief Winner display delay (in ms).
-#define WINNER_DISPLAY 3000
+#define WINNER_DELAY 3000
 
 /// @brief Minimum amount of time before the signal light comes on (in ms).
 #define MIN_WAIT 1000
@@ -185,14 +185,14 @@ void startup_signal()
   delay(BLINK_DELAY);
 
   for(int i = 0; i < BLINKS_ON_STARTUP; i++)
-    blink_lights();
+    blink_all_lights();
 }
 
 /// @brief Starts a new timer:
 void start_timer()
 {
   timer_ref = millis();
-  timer_duration = random(MIN_TIME, MAX_TIME + 1);
+  timer_duration = random(MIN_WAIT, MAX_WAIT + 1);
 }
 /// @brief Checks to see if the timer has elapsed:
 
@@ -287,7 +287,7 @@ void blink_score()
 void button_pressed(int player)
 {
   signal_light_off();
-  if(timer_expired())
+  if(timer_elapsed())
     reward_player(player);
   else
     penalize_player(player);
