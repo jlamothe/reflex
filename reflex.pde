@@ -33,6 +33,9 @@
 /// @brief Winner display delay (in ms).
 #define WINNER_DELAY 3000
 
+/// @brief Delay after showing winner (in ms).
+#define AFTER_WINNER_DELAY 1000
+
 /// @brief Minimum amount of time before the signal light comes on (in ms).
 #define MIN_WAIT 1000
 
@@ -265,8 +268,6 @@ int get_max_score()
 /// @brief Blinks the players' scores on their lights.
 void blink_score()
 {
-  all_lights_off();
-  delay(BLINK_DELAY);
   int max_score = get_max_score();
   for(int i = 0; i < max_score; i++)
     {
@@ -291,6 +292,8 @@ void button_pressed(int player)
     reward_player(player);
   else
     penalize_player(player);
+  player_lights_off();
+  delay(AFTER_WINNER_DELAY);
   blink_score();
   start_timer();
 }
