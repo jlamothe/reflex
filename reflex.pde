@@ -178,7 +178,7 @@ void startup_signal()
   for(int i = NUM_PLAYERS - 1; i >= 0; i--)
     {
       light_player(i);
-      delay(BLINK_DELAY);
+       delay(BLINK_DELAY);
     }
 
   player_lights_off();
@@ -222,7 +222,7 @@ void signal_check()
 int scan_for_button()
 {
   for(int i = 0; i < NUM_PLAYERS; i++)
-    if(analogRead(input_pin[i]) == LOW)
+    if(digitalRead(input_pin[i]) == LOW)
       return i;
   return -1;
 }
